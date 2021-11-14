@@ -1,5 +1,5 @@
 # number_shapes
-## Guess Number Homework
+## Number Shapes Homework
 
 Author : [@timi-petre ](https://github.com/timi-petre)
 
