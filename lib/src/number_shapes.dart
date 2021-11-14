@@ -32,8 +32,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 Constante consts = Constante(
-    textTitle: "Please input a number to see if it's square or triangular.",
-    result: '');
+  textTitle: "Please input a number to see if it's square or triangular.",
+  result: '',
+);
 
 class _MyHomePageState extends State<MyHomePage> {
   final FocusNode _focusNode = FocusNode();
