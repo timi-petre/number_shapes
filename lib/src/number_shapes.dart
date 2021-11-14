@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:number_shapes/consts/consts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,25 +31,24 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+Constante consts = Constante(
+    textTitle: "Please input a number to see if it's square or triangular.",
+    result: '');
+
 class _MyHomePageState extends State<MyHomePage> {
   final FocusNode _focusNode = FocusNode();
-  final String textTitle =
-      "Please input a number to see if it's square or triangular.";
+
   final textController = TextEditingController();
 
-  bool isSquare(int x) {
-    if (x >= 0) {
-      double sr = sqrt(x);
-      return (pow(sr,2) == x);
-    }
-    return false;
+  bool isSquare(int n) {
+    int root = (pow(n, 0.5)).round();
+    return n == pow(root, 2);
   }
 
-  bool isTriangular(int z) extends isSquare(x) {
-    return (isSquare());
+  bool isTriangular(int n) {
+    int root = (pow(n, 1 / 3)).round();
+    return n == pow(root, 3);
   }
-
-  
 
   @override
   void dispose() {
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                textTitle,
+                consts.textTitle,
                 style: Theme.of(context).textTheme.headline5,
                 textAlign: TextAlign.center,
               ),
@@ -91,26 +91,34 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           final String value = textController.text;
           final int? intValue = int.tryParse(value);
+
           setState(() {
-            if (intValue != null) {
-              textController.clear();
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text('$intValue'),
-                  content: Text('Number $intValue is }'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        FocusScope.of(context).requestFocus(FocusNode());
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
-              );
+            if (!isSquare(intValue!) && isTriangular(intValue)) {
+              consts.result = "Triangular".toUpperCase();
+            } else if (!isSquare(intValue) && !isTriangular(intValue)) {
+              consts.result = "neither SQUARE or TRIANGULAR";
+            } else if (isSquare(intValue) && !isTriangular(intValue)) {
+              consts.result = "Square".toUpperCase();
+            } else if (isSquare(intValue) && isTriangular(intValue)) {
+              consts.result = "SQUARE and TRIANGULAR";
             }
+            textController.clear();
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text('$intValue'),
+                content: Text('Number $intValue is ${consts.result}'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      FocusScope.of(context).requestFocus(FocusNode());
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
           });
         },
       ),
