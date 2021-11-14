@@ -17,10 +17,11 @@ The application contains:
 Example:
  
 
-https://user-images.githubusercontent.com/12413810/141467909-dc9dbade-7226-445c-907d-dbdcbf180738.mp4
+https://user-images.githubusercontent.com/12413810/141698508-71e5f492-fd2b-424e-9064-5bc1dc22333b.mp4
 
 
 <details>
+
   <summary>Image 1</summary>
 
 <img src="https://github.com/timi-petre/number_shapes/blob/2a12845ebf9aeadd73c5f04c369d828725e63285/assets/Screenshot_1636923508.png" alt="Image 1" height="800" width="50%">
